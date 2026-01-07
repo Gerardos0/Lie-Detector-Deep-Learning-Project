@@ -5,7 +5,7 @@ from tqdm import tqdm
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-from ..config import DATA_DIR, IMG_SIZE, MAX_SEQ_LENGTH
+from ..config import DATA_DIR, MAX_SEQ_LENGTH
 from .video_utils import extract_frames
 from .audio_utils import create_spectrogram
 from .text_utils import transcribe_audio, load_glove_embeddings, create_embedding_matrix
@@ -38,19 +38,21 @@ def load_multimodal_data():
             
             try:
                 # Visual
-                frame = extract_frames(video_path)
-                frame_data.append(frame)
-                
+                frames = extract_frames(video_path)
                 # Audio
                 spectrogram = create_spectrogram(video_path)
-                spectrogram_data.append(spectrogram)
-                
                 # Text
                 transcription = transcribe_audio(video_path)
-                transcription_data.append(transcription)
                 
-                # Label
-                labels.append(label_id)
+                for frame in frames:
+                    frame_data.append(frame)
+
+                    #Duplicate so that during Concatenation of the sub-models, there is no shape conflicts between the 3 models
+                    spectrogram_data.append(spectrogram)
+                    transcription_data.append(transcription)
+                
+                    #Labels
+                    labels.append(label_id)
                 
             except Exception as e:
                 print(f"Error processing {video_file}: {e}")

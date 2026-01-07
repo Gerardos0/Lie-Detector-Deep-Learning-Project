@@ -1,16 +1,53 @@
 import whisper
 import numpy as np
 import os
+import re
+import string
 from ..config import GLOVE_PATH, EMBEDDING_DIM
+WHISPER_MODEL = None
+try:
+    import whisper
+    WHISPER_AVAILABLE = True
+except ImportError:
+    WHISPER_AVAILABLE = False
+    print("openai-whisper not installed.")
+
+
+def clean_text(text):
+    """
+    Cleans transcribed texts.
+    Removes uppercase letters, audio cues, punctuation, and extra whitespace
+    """
+    text = text.lower()
+    #remove audio cues like [music] or (laughter)
+    text = re.sub(r'\[.*?\]|\(.*?\)|\<.*?\>', ' ', text)
+    # Remove punctuation
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    # Remove symbols
+    text = re.sub(r'[^\w\s]', '', text)
+    # Remove extra whitespace
+    text = ' '.join(text.split())
+
+    return text
 
 def transcribe_audio(audio_path):
     """
-    Uses OpenAI Whisper 'base' model to transcribe speech to text.
+    Uses OpenAI Whisper 'base' model to transcribe audio to text.
     """
-    model = whisper.load_model("base")
-    # Whisper can process audio directly from video files
-    result = model.transcribe(audio_path)
-    return result["text"]
+    global WHISPER_MODEL
+    
+    if not WHISPER_AVAILABLE:
+        return "silence"
+
+    if WHISPER_MODEL is None:
+        print("Loading Whisper Model...")
+        WHISPER_MODEL = whisper.load_model("base")
+
+    # Transcribe
+    result = WHISPER_MODEL.transcribe(audio_path)
+    
+    # Clean the text and return
+    return clean_text(result["text"])
 
 def load_glove_embeddings():
     """
