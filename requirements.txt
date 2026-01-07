@@ -1,0 +1,10 @@
+tensorflow
+openai-whisper
+numpy
+opencv-python
+librosa
+matplotlib
+pandas
+scikit-learn
+tqdm
+torch

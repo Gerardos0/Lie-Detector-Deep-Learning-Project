@@ -1,0 +1,13 @@
+import os
+
+IMG_SIZE = (224, 224)
+BATCH_SIZE = 32
+EPOCHS = 30
+CHANNELS = 3
+RANDOM_SEED = 1
+MAX_SEQ_LENGTH = 100
+EMBEDDING_DIM = 100
+
+# Paths
+DATA_DIR = "data/" 
+GLOVE_PATH = "glove.6B.100d.txt"
