@@ -40,7 +40,6 @@ graph TD
 │   └── Deceptive/
 │
 ├── src/
-│   │
 │   ├── models/                # Neural Network Architectures
 │   │   ├── frame_model.py             # VGG16 for Video Frames
 │   │   ├── spectrogram_model.py       # VGG16 for Audio Spectrograms
@@ -49,14 +48,14 @@ graph TD
 │   │   └── fusion_model.py            # Multimodal concatenation logic
 │   │
 │   ├── preprocessing/         # ETL Pipelines
-│   │   ├── dataset_loader.py          # Data Processing and syncing 
+│   │   ├── dataset_loader.py          # Data Processing and syncing
 │   │   ├── video_utils.py             # Frame Extraction and Face Cropping
 │   │   ├── audio_utils.py             # Mel-Spectrogram generation
 │   │   ├── text_utils.py              # OpenAI Whisper & Text Cleaning
 │   │   └── anomaly_detector.py        # Autoencoder training & Anomaly filtering
 │   │
-│   ├── train.py               # Main (training) 
-│   ├── predict.py             # Single Video Prediciton
+│   ├── train.py               # Main (training)
+│   ├── predict.py             # Single Video Prediction
 │   ├── config.py              # Global configuration variables
 │   └── utils.py               # Visualization & Helper functions
 │
