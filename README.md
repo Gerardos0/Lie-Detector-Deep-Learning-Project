@@ -35,34 +35,34 @@ graph TD
     Fusion --> Output[Binary Classification: Truthful vs. Deceptive]
 ```
 ## Project Structure:
-├── data/                      # Dataset directory
-│   ├── Truthful/
-│   └── Deceptive/
-│
-├── src/
-│   ├── models/                # Neural Network Architectures
-│   │   ├── frame_model.py             # VGG16 for Video Frames
-│   │   ├── spectrogram_model.py       # VGG16 for Audio Spectrograms
-│   │   ├── transcription_model.py     # NLP Model (GloVe + Dense)
-│   │   ├── autoencoder_model.py       # Anomaly Detection Architecture
-│   │   └── fusion_model.py            # Multimodal concatenation logic
-│   │
-│   ├── preprocessing/         # ETL Pipelines
-│   │   ├── dataset_loader.py          # Data Processing and syncing
-│   │   ├── video_utils.py             # Frame Extraction and Face Cropping
-│   │   ├── audio_utils.py             # Mel-Spectrogram generation
-│   │   ├── text_utils.py              # OpenAI Whisper & Text Cleaning
-│   │   └── anomaly_detector.py        # Autoencoder training & Anomaly filtering
-│   │
-│   ├── train.py               # Main (training)
-│   ├── predict.py             # Single Video Prediction
-│   ├── config.py              # Global configuration variables
-│   └── utils.py               # Visualization & Helper functions
-│
-├── glove.6B.100d.txt          # Pre-trained Word Embeddings (External)
-├── final_model.h5             # Trained Model
-├── requirements.txt           # Project dependencies
-└── README.md
+- **data/** — Dataset directory  
+  - **Truthful/**
+  - **Deceptive/**
+
+- **src/**
+  - **models/** — Neural Network Architectures  
+    - `frame_model.py` — VGG16 for Video Frames  
+    - `spectrogram_model.py` — VGG16 for Audio Spectrograms  
+    - `transcription_model.py` — NLP Model (GloVe + Dense)  
+    - `autoencoder_model.py` — Anomaly Detection Architecture  
+    - `fusion_model.py` — Multimodal concatenation logic  
+
+  - **preprocessing/** — ETL Pipelines  
+    - `dataset_loader.py` — Data Processing and syncing  
+    - `video_utils.py` — Frame Extraction and Face Cropping  
+    - `audio_utils.py` — Mel-Spectrogram generation  
+    - `text_utils.py` — OpenAI Whisper & Text Cleaning  
+    - `anomaly_detector.py` — Autoencoder training & Anomaly filtering  
+
+  - `train.py` — Main (training)  
+  - `predict.py` — Single Video Prediction  
+  - `config.py` — Global configuration variables  
+  - `utils.py` — Visualization & Helper functions  
+
+- `glove.6B.100d.txt` — Pre-trained Word Embeddings (External)  
+- `final_model.h5` — Trained Model  
+- `requirements.txt` — Project dependencies  
+- `README.md`
 
 ### Prerequisires
 * Python 3.9
