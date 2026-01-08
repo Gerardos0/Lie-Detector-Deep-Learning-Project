@@ -23,16 +23,16 @@ The pipeline follows a modular design pattern:
 
 ```mermaid
 graph TD
-    Input[Video Input] --> Visual[Visual Branch<br>(Frames -> Face Crop -> VGG16)]
-    Input --> Audio[Audio Branch<br>(Waveform -> Mel-Spectrogram -> VGG16)]
-    Input --> Text[Text Branch<br>(Transcription -> GloVe Embeddings -> Dense)]
+    Input[Video Input] --> Visual["Visual Branch (Frames -> Face Crop -> VGG16)"]
+    Input --> Audio["Audio Branch (Waveform -> Mel-Spectrogram -> VGG16)"]
+    Input --> Text["Text Branch (Transcription -> GloVe Embeddings -> Dense)"]
     
     Visual --> Concatenate
     Audio --> Concatenate
     Text --> Concatenate
     
-    Concatenate --> Fusion[Fusion Layer<br>(Fully Connected + Dropout)]
-    Fusion --> Output[Binary Classification<br>(Truthful vs. Deceptive)]
+    Concatenate --> Fusion["Fusion Layer (Fully Connected + Dropout)"]
+    Fusion --> Output[Binary Classification: Truthful vs. Deceptive]
 ```
 ## Project Structure:
 ├── data/                      # Dataset directory
@@ -62,6 +62,7 @@ graph TD
 │
 ├── glove.6B.100d.txt          # Pre-trained Word Embeddings (External)
 ├── final_model.h5             # Trained Model
+├── requirements.txt           # Project dependencies
 └── README.md
 
 ### Prerequisires
